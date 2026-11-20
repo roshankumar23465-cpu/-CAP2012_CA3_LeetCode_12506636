@@ -1,0 +1,57 @@
+class MyLinkedList {
+    struct Node {
+        int val;
+        Node* next;
+        Node(int x) : val(x), next(NULL) {}
+    };
+    Node* head = NULL;
+    int size = 0;
+
+public:
+    MyLinkedList() {}
+
+    int get(int i) {
+        Node* p = head;
+        if (i < 0 || i >= size) return -1;
+        while (i--) p = p->next;
+        return p->val;
+    }
+
+    void addAtHead(int val) {
+        Node* p = new Node(val);
+        p->next = head;
+        head = p;
+        size++;
+    }
+
+    void addAtTail(int val) {
+        addAtIndex(size, val);
+    }
+
+    void addAtIndex(int i, int val) {
+        if (i < 0) i = 0;
+        if (i > size) return;
+        if (i == 0) { addAtHead(val); return; }
+        Node* p = head;
+        while (--i) p = p->next;
+        Node* n = new Node(val);
+        n->next = p->next;
+        p->next = n;
+        size++;
+    }
+
+    void deleteAtIndex(int i) {
+        if (i < 0 || i >= size) return;
+        Node* p = head;
+        if (i == 0) head = head->next;
+        else {
+            while (--i) p = p->next;
+            Node* t = p->next;
+            p->next = t->next;
+            delete t;
+        }
+        size--;
+    }
+};
+;
+ */
